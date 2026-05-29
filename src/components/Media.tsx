@@ -149,35 +149,30 @@ export const SlidingHero: React.FC<SlidingHeroProps> = ({
         <h1 className="font-serif text-5xl md:text-6xl font-semibold text-white mb-4">{title}</h1>
         <div className="text-xl md:text-2xl text-gold mb-6">{subtitle}</div>
         {breadcrumb && (
-          <div className="text-sm text-white/70 mb-6">
+          <div className="breadcrumbs">
             <a
               href="#home"
-              className="text-gold hover:text-gold-soft transition-colors"
               onClick={(e) => {
                 e.preventDefault();
-                navigate?.('home');
+                navigate && navigate("home");
               }}
             >
               Home
             </a>
-            {' › '}
+            {" › "}
             {breadcrumb}
           </div>
         )}
         {children}
         {images && images.length > 1 && (
-          <div className="flex gap-2.5 justify-center mt-9">
+          <div className="sliding-hero-dots">
             {images.map((_, i) => (
               <button
                 key={i}
-                className={`transition-all duration-300 rounded-sm h-0.75 ${
-                  idx === i
-                    ? 'bg-gold w-12'
-                    : 'bg-white/30 w-7 hover:bg-white/60'
-                }`}
+                className={`hero-dot ${idx === i ? "active" : ""}`}
                 aria-label={`Slide ${i + 1}`}
                 onClick={() => setIdx(i)}
-              />
+              ></button>
             ))}
           </div>
         )}

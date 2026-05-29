@@ -1486,6 +1486,275 @@ textarea.form-control {
   line-height: 1.5;
 }
 
+/* ============== Academics page ============== */
+.philosophy-grid p {
+  color: var(--text-dark);
+  font-size: 16.5px;
+  line-height: 1.8;
+}
+
+.programme {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+}
+.programme.reverse {
+  direction: rtl;
+}
+.programme.reverse > * {
+  direction: ltr;
+}
+@media (max-width: 900px) {
+  .programme,
+  .programme.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+}
+.programme-img {
+  min-height: 480px;
+  position: relative;
+  overflow: hidden;
+}
+.programme-img .real-img,
+.programme-img .img-placeholder {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+}
+.programme-panel {
+  padding: clamp(48px, 6vw, 88px) clamp(32px, 5vw, 72px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.programme-panel.navy {
+  background: var(--navy);
+  color: white;
+}
+.programme-panel.light {
+  background: var(--warm-white);
+  color: var(--text-dark);
+}
+.programme-panel h2 {
+  font-size: clamp(30px, 4vw, 42px);
+  margin: 12px 0 8px;
+}
+.programme-panel.navy h2 {
+  color: white;
+}
+.programme-panel.light h2 {
+  color: var(--navy);
+}
+.programme-meta {
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+.programme-meta.light {
+  color: var(--gold-deep);
+}
+.programme-meta.gold-meta {
+  color: var(--gold);
+  text-align: center;
+}
+.programme-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+  margin-bottom: 36px;
+}
+@media (max-width: 600px) {
+  .programme-list {
+    grid-template-columns: 1fr;
+  }
+}
+.programme-list li {
+  padding: 10px 0 10px 22px;
+  position: relative;
+  font-size: 15px;
+}
+.programme-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.programme-list.dark li {
+  color: var(--text-dark);
+}
+.programme-list:not(.dark) li {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Secondary full */
+.secondary-full {
+  background: var(--navy);
+  padding: clamp(80px, 9vw, 128px) var(--pad-x);
+}
+.secondary-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 56px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+@media (max-width: 800px) {
+  .secondary-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+.secondary-col h3 {
+  color: var(--gold);
+  font-size: 22px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+}
+.secondary-col ul {
+  list-style: none;
+}
+.secondary-col li {
+  color: rgba(255, 255, 255, 0.85);
+  padding: 8px 0;
+  font-size: 15.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.secondary-divider {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--gold), transparent);
+}
+@media (max-width: 800px) {
+  .secondary-divider {
+    display: none;
+  }
+}
+
+/* Extras */
+.extras-grid {
+  gap: 24px;
+}
+.extra-card {
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+.extra-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.extra-image {
+  height: 180px;
+  border-radius: 0;
+}
+.extra-body {
+  padding: 24px;
+}
+.extra-tag {
+  display: inline-block;
+  background: rgba(201, 168, 76, 0.15);
+  color: var(--gold-deep);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.extra-body h4 {
+  color: var(--navy);
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.extra-body p {
+  color: var(--text-muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* Calendar */
+.calendar-section {
+  background: var(--navy);
+  padding: clamp(80px, 9vw, 128px) var(--pad-x);
+}
+.term-grid {
+  gap: 24px;
+}
+.term-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid var(--gold);
+  padding: 32px 28px;
+  border-radius: 6px;
+}
+.term-num {
+  font-family: var(--font-serif);
+  color: var(--gold);
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.term-card h4 {
+  color: white;
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+.term-dates {
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+}
+.term-card ul {
+  list-style: none;
+}
+.term-card li {
+  color: rgba(255, 255, 255, 0.82);
+  padding: 6px 0;
+  font-size: 14.5px;
+}
+
+/* Results */
+.results-grid {
+  gap: 32px;
+}
+.result-card {
+  text-align: center;
+  padding: 32px 24px;
+}
+.result-num {
+  font-family: var(--font-serif);
+  font-size: clamp(56px, 7vw, 84px);
+  color: var(--gold);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+.result-card h4 {
+  color: var(--navy);
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.result-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
 /* ============== Admissions page ============== */
 .steps-timeline {
   display: grid;

@@ -34,6 +34,60 @@ export const Img: React.FC<ImgProps> = ({ src, alt, label, className = '', style
   );
 };
 
+interface CountUpProps {
+  value: string;
+}
+
+export const CountUp: React.FC<CountUpProps> = ({ value }) => {
+  const [display, setDisplay] = useState<string>('0');
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    const num = parseInt(value.replace(/[^0-9]/g, ''));
+    if (isNaN(num)) {
+      setDisplay(value);
+      return;
+    }
+
+    let start = 0;
+    const duration = 2000;
+    const startTime = performance.now();
+
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const currentNum = Math.floor(progress * num);
+
+      const suffix = value.replace(/[0-9]/g, '');
+      setDisplay(currentNum + suffix);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [visible, value]);
+
+  return <div ref={ref}>{display}</div>;
+};
+
 interface RevealProps {
   children: ReactNode;
   delay?: number;

@@ -208,18 +208,16 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
   const [idx, setIdx] = useState<number>(0);
   const [playing, setPlaying] = useState<boolean>(true);
 
-  const goto = (i: number) => setIdx(((i % tour.length) + tour.length) % tour.length);
-  const next = () => goto(idx + 1);
-  const prev = () => goto(idx - 1);
+  const goto = React.useCallback((i: number) => setIdx(((i % tour.length) + tour.length) % tour.length), [tour.length]);
+  const next = React.useCallback(() => goto(idx + 1), [idx, goto]);
+  const prev = React.useCallback(() => goto(idx - 1), [idx, goto]);
 
-  // Autoplay
   useEffect(() => {
     if (!open || !playing) return;
     const t = setInterval(next, 4200);
     return () => clearInterval(t);
-  }, [open, playing, idx]);
+  }, [open, playing, next]);
 
-  // Reset on open
   useEffect(() => {
     if (open) {
       setIdx(0);
@@ -227,7 +225,6 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
     }
   }, [open]);
 
-  // Keyboard
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -245,113 +242,82 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
       document.body.style.overflow = '';
       document.removeEventListener('keydown', onKey);
     };
-  }, [open]);
+  }, [open, next, prev, onClose]);
 
-  // Scroll active thumbnail into view
   const thumbStripRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!thumbStripRef.current) return;
-    const el = thumbStripRef.current.querySelector(`[data-i="${idx}"]`) as HTMLElement;
+    const el = thumbStripRef.current.querySelector(`.tour-thumb[data-i="${idx}"]`) as HTMLElement;
     if (el) {
       const strip = thumbStripRef.current;
       const elLeft = el.offsetLeft - strip.offsetLeft;
-      strip.scrollTo({
-        left: elLeft - strip.clientWidth / 2 + el.clientWidth / 2,
-        behavior: 'smooth',
-      });
+      strip.scrollTo({ left: elLeft - strip.clientWidth / 2 + el.clientWidth / 2, behavior: 'smooth' });
     }
   }, [idx]);
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-navy-dark/92 z-50 grid place-items-center p-6 animate-fadeIn backdrop-blur-sm" onClick={onClose}>
-      <div
-        className="bg-navy-dark border border-gold/40 rounded-lg w-full max-w-4xl max-h-screen overflow-hidden flex flex-col animate-fadeUp shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div className="flex justify-between items-center px-7 py-5 border-b border-gold/20">
+    <div className="tour-modal" onClick={onClose}>
+      <div className="tour-modal-inner slideshow" onClick={(e) => e.stopPropagation()}>
+        <div className="tour-header">
           <div>
-            <div className="text-xs text-gold font-semibold tracking-widest uppercase mb-1">Virtual Tour · Photo Slideshow</div>
-            <h3 className="text-white text-xl font-serif font-semibold">Welcome to SoarHigh Schools</h3>
+            <div className="tour-eyebrow">Virtual Tour · Photo Slideshow</div>
+            <h3>Welcome to SoarHigh Schools</h3>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-gold font-serif text-sm tracking-wide border border-gold/30 px-3 py-1 rounded-full">
+          <div className="tour-header-right">
+            <div className="tour-counter">
               {String(idx + 1).padStart(2, '0')} / {String(tour.length).padStart(2, '0')}
             </div>
-            <button
-              className="w-10 h-10 rounded-full border border-gold/40 text-gold flex items-center justify-center hover:bg-gold hover:text-navy transition-all"
-              onClick={onClose}
-              aria-label="Close"
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
+            <button className="tour-close" onClick={onClose} aria-label="Close">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
                 <path d="M6 6 L18 18 M18 6 L6 18" />
               </svg>
             </button>
           </div>
         </div>
 
-        {/* Stage */}
-        <div className="relative bg-black aspect-video max-h-96 overflow-hidden">
+        <div className="tour-stage slideshow-stage">
           {tour.map((s, i) => (
-            <div
-              key={i}
-              className={`absolute inset-0 opacity-0 transform scale-104 transition-all duration-[0.9s] ease-out pointer-events-none ${
-                idx === i ? 'opacity-100 scale-100 pointer-events-auto' : ''
-              }`}
-            >
-              <img src={s.src} alt={s.title} className="w-full h-full object-cover" />
+            <div key={i} className={`tour-slide ${idx === i ? 'active' : idx > i ? 'before' : 'after'}`}>
+              <img src={s.src} alt={s.title} />
             </div>
           ))}
 
-          {/* Progress bar */}
+          {/* Progress Bar */}
           <div
+            className="tour-progress"
             key={`p-${idx}-${playing}`}
-            className="absolute top-0 left-0 h-0.75 bg-gold animate-tourProgress"
             style={{ animationPlayState: playing ? 'running' : 'paused' }}
-          />
+          ></div>
 
           {/* Caption */}
-          <div key={`c-${idx}`} className="absolute bottom-0 left-0 right-0 px-24 py-8 bg-gradient-to-t from-navy-dark/95 to-transparent text-white z-10 animate-captionRise">
-            <div className="font-serif text-2xl text-gold font-semibold mb-1.5">{tour[idx].title}</div>
-            <div className="text-sm text-white/85 max-w-2xl">{tour[idx].caption}</div>
+          <div className="tour-caption" key={`c-${idx}`}>
+            <div className="tour-caption-title">{tour[idx].title}</div>
+            <div className="tour-caption-body">{tour[idx].caption}</div>
           </div>
 
-          {/* Nav arrows */}
-          <button
-            className="absolute left-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-navy/70 text-gold flex items-center justify-center z-20 transition-all hover:bg-gold hover:text-navy border border-gold/30 backdrop-blur-sm"
-            onClick={prev}
-            aria-label="Previous"
-          >
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          {/* Nav Arrows */}
+          <button className="tour-nav prev" onClick={prev} aria-label="Previous">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <path d="M15 18 L9 12 L15 6" />
             </svg>
           </button>
-
-          <button
-            className="absolute right-5 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-navy/70 text-gold flex items-center justify-center z-20 transition-all hover:bg-gold hover:text-navy border border-gold/30 backdrop-blur-sm"
-            onClick={next}
-            aria-label="Next"
-          >
-            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <button className="tour-nav next" onClick={next} aria-label="Next">
+            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 18 L15 12 L9 6" />
             </svg>
           </button>
 
-          {/* Play/pause */}
-          <button
-            className="absolute top-5 left-5 flex items-center gap-2 px-3.5 py-2 rounded-full bg-navy/75 text-gold text-xs font-semibold tracking-widest uppercase z-20 transition-all hover:bg-gold hover:text-navy border border-gold/30 backdrop-blur-sm"
-            onClick={() => setPlaying((p) => !p)}
-            aria-label={playing ? 'Pause' : 'Play'}
-          >
+          {/* Play/Pause */}
+          <button className="tour-playpause" onClick={() => setPlaying((p) => !p)} aria-label={playing ? 'Pause' : 'Play'}>
             {playing ? (
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                 <rect x="6" y="5" width="4" height="14" />
                 <rect x="14" y="5" width="4" height="14" />
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                 <path d="M7 4 L20 12 L7 20 Z" />
               </svg>
             )}
@@ -359,25 +325,11 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
           </button>
         </div>
 
-        {/* Thumbnails */}
-        <div ref={thumbStripRef} className="flex gap-2 px-5 py-4 overflow-x-auto bg-black/20 scroll-smooth scrollbar-thin scrollbar-thumb-gold scrollbar-track-transparent">
+        <div className="tour-thumbs" ref={thumbStripRef}>
           {tour.map((s, i) => (
-            <button
-              key={i}
-              data-i={i}
-              className={`flex-shrink-0 w-32 h-20 rounded-sm overflow-hidden border-2 transition-all ${
-                idx === i
-                  ? 'border-gold opacity-100'
-                  : 'border-transparent opacity-55 hover:opacity-100 hover:-translate-y-0.5'
-              }`}
-              onClick={() => goto(i)}
-              aria-label={s.title}
-            >
-              <img src={s.src} alt="" className="w-full h-full object-cover" />
-              <div className="absolute bottom-0 left-0 right-0 px-2 py-1 bg-gradient-to-t from-navy-dark/92 text-white text-xs font-medium">
-                {s.title}
-              </div>
-            </button>
+            <div key={i} className={`tour-thumb ${idx === i ? 'active' : ''}`} data-i={i} onClick={() => setIdx(i)}>
+              <img src={s.src} alt={s.title} />
+            </div>
           ))}
         </div>
       </div>

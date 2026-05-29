@@ -88,7 +88,7 @@ const Academics: React.FC<AcademicsProps> = ({ navigate }) => {
       <section className="section">
         <div className="container text-center">
           <span className="eyebrow">Our Approach</span>
-          <h2 className="section-heading heading-line">Our Academic Philosophy</h2>
+          <h2 className="section-heading underline">Our Academic Philosophy</h2>
         </div>
         <div className="container" style={{ marginTop: 40 }}>
           <div className="grid grid-2 philosophy-grid">
@@ -220,7 +220,7 @@ const Academics: React.FC<AcademicsProps> = ({ navigate }) => {
       <section className="section">
         <div className="container text-center">
           <span className="eyebrow">Beyond the Classroom</span>
-          <h2 className="section-heading heading-line">Where Talent Meets Time</h2>
+          <h2 className="section-heading underline">Where Talent Meets Time</h2>
           <p className="section-sub">
             Twenty-plus clubs and teams. Every child finds something they love.
           </p>
@@ -319,7 +319,9 @@ const Academics: React.FC<AcademicsProps> = ({ navigate }) => {
       <section className="section" style={{ background: "var(--warm-white)" }}>
         <div className="container text-center">
           <span className="eyebrow">Track Record</span>
-          <h2 className="section-heading heading-line">Our Academic Track Record</h2>
+          <h2 className="section-heading underline">
+            Our Academic Track Record
+          </h2>
         </div>
         <div className="container" style={{ marginTop: 64 }}>
           <div className="grid grid-3 results-grid">

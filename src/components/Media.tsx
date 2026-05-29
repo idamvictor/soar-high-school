@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, ReactNode } from 'react';
-import { MEDIA } from '../data/media';
+import React, { useState, useEffect, useRef, ReactNode } from "react";
+import { MEDIA } from "../data/media";
 
 interface ImgProps {
   src?: string;
@@ -9,14 +9,20 @@ interface ImgProps {
   style?: React.CSSProperties;
 }
 
-export const Img: React.FC<ImgProps> = ({ src, alt, label, className = '', style }) => {
+export const Img: React.FC<ImgProps> = ({
+  src,
+  alt,
+  label,
+  className = "",
+  style,
+}) => {
   const [errored, setErrored] = useState<boolean>(false);
 
   if (errored || !src) {
     return (
       <div
         className={`img-placeholder ${className}`}
-        data-label={label || alt || 'image'}
+        data-label={label || alt || "image"}
         style={style}
       />
     );
@@ -25,7 +31,7 @@ export const Img: React.FC<ImgProps> = ({ src, alt, label, className = '', style
   return (
     <img
       src={src}
-      alt={alt || ''}
+      alt={alt || ""}
       className={`real-img ${className}`}
       style={style}
       loading="lazy"
@@ -39,7 +45,7 @@ interface CountUpProps {
 }
 
 export const CountUp: React.FC<CountUpProps> = ({ value }) => {
-  const [display, setDisplay] = useState<string>('0');
+  const [display, setDisplay] = useState<string>("0");
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -51,7 +57,7 @@ export const CountUp: React.FC<CountUpProps> = ({ value }) => {
           setVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     io.observe(ref.current);
     return () => io.disconnect();
@@ -59,7 +65,7 @@ export const CountUp: React.FC<CountUpProps> = ({ value }) => {
 
   useEffect(() => {
     if (!visible) return;
-    const num = parseInt(value.replace(/[^0-9]/g, ''));
+    const num = parseInt(value.replace(/[^0-9]/g, ""));
     if (isNaN(num)) {
       setDisplay(value);
       return;
@@ -74,7 +80,7 @@ export const CountUp: React.FC<CountUpProps> = ({ value }) => {
       const progress = Math.min(elapsed / duration, 1);
       const currentNum = Math.floor(progress * num);
 
-      const suffix = value.replace(/[0-9]/g, '');
+      const suffix = value.replace(/[0-9]/g, "");
       setDisplay(currentNum + suffix);
 
       if (progress < 1) {
@@ -99,8 +105,8 @@ interface RevealProps {
 export const Reveal: React.FC<RevealProps> = ({
   children,
   delay = 0,
-  as = 'div',
-  className = '',
+  as = "div",
+  className = "",
   ...rest
 }) => {
   const ref = useRef<HTMLElement>(null);
@@ -118,7 +124,7 @@ export const Reveal: React.FC<RevealProps> = ({
           }
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -128,7 +134,7 @@ export const Reveal: React.FC<RevealProps> = ({
   return (
     <Tag
       ref={ref}
-      className={`reveal ${visible ? 'in' : ''} ${className}`}
+      className={`reveal ${visible ? "in" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
       {...rest}
     >
@@ -144,7 +150,12 @@ interface StaggerProps {
   className?: string;
 }
 
-export const Stagger: React.FC<StaggerProps> = ({ children, step = 90, base = 0, className = '' }) => {
+export const Stagger: React.FC<StaggerProps> = ({
+  children,
+  step = 90,
+  base = 0,
+  className = "",
+}) => {
   return (
     <div className={className}>
       {React.Children.map(children, (child, i) => (
@@ -177,31 +188,32 @@ export const SlidingHero: React.FC<SlidingHeroProps> = ({
 
   useEffect(() => {
     if (!images || images.length < 2) return;
-    const t = setInterval(() => setIdx((i) => (i + 1) % images.length), interval);
+    const t = setInterval(
+      () => setIdx((i) => (i + 1) % images.length),
+      interval,
+    );
     return () => clearInterval(t);
   }, [images, interval]);
 
   return (
-    <section className="relative pt-32 pb-20 px-[--pad-x] overflow-hidden isolate before:absolute before:inset-0 before:bg-gradient-to-b before:from-navy/40 before:to-navy-dark/85 before:pointer-events-none before:z-10">
+    <section className="sliding-hero">
       {/* Background slides */}
-      <div className="absolute inset-0 z-0">
+      <div className="sliding-hero-bg">
         {images.map((src, i) => (
           <div
             key={i}
-            className={`absolute inset-0 opacity-0 transform scale-108 transition-all duration-[1.4s] ease-out ${
-              idx === i ? 'opacity-100 scale-100' : ''
-            }`}
+            className={`sliding-hero-slide ${idx === i ? "active" : ""}`}
           >
-            <img src={src} alt="" loading={i === 0 ? 'eager' : 'lazy'} className="w-full h-full object-cover" />
+            <img src={src} alt="" loading={i === 0 ? "eager" : "lazy"} />
           </div>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/35 to-navy-dark/75 radial-gradient pointer-events-none" />
+        <div className="sliding-hero-tint" />
       </div>
 
       {/* Content */}
-      <div className="relative z-20 max-w-4xl mx-auto text-center">
-        <h1 className="font-serif text-5xl md:text-6xl font-semibold text-white mb-4">{title}</h1>
-        <div className="text-xl md:text-2xl text-gold mb-6">{subtitle}</div>
+      <div className="sliding-hero-content">
+        <h1>{title}</h1>
+        <div className="sub">{subtitle}</div>
         {breadcrumb && (
           <div className="breadcrumbs">
             <a
@@ -240,24 +252,70 @@ interface VirtualTourModalProps {
   onClose: () => void;
 }
 
-export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClose }) => {
+export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({
+  open,
+  onClose,
+}) => {
   const tour = [
-    { src: MEDIA.schoolBuilding, title: 'Main Campus', caption: '12 Independence Layout, Enugu — our home since 2010.' },
-    { src: MEDIA.classroomPrimary, title: 'Primary Classroom', caption: 'Small classes, large windows, deep learning.' },
-    { src: MEDIA.classroomSecondary, title: 'Senior Classroom', caption: 'Where WAEC, NECO and university futures are shaped.' },
-    { src: MEDIA.library, title: 'School Library', caption: 'Over 18,000 volumes and quiet space to think.' },
-    { src: MEDIA.science, title: 'Science Centre', caption: 'Three labs — biology, chemistry, physics — all equipped.' },
-    { src: MEDIA.coding, title: 'Computer Lab', caption: 'Coding, robotics, and our FIRST LEGO competition team.' },
-    { src: MEDIA.football, title: 'Sports Field', caption: 'Football, athletics, and Inter-house Sports every March.' },
-    { src: MEDIA.drama, title: 'Performing Arts', caption: 'Two full theatre productions a year, plus dance and music.' },
-    { src: MEDIA.nursery, title: 'Nursery Wing', caption: 'Bright, playful, gentle — a soft landing for our youngest.' },
-    { src: MEDIA.studentsGroup, title: 'School Life', caption: 'Friendships, laughter, and a community that lasts.' },
+    {
+      src: MEDIA.schoolBuilding,
+      title: "Main Campus",
+      caption: "12 Independence Layout, Enugu — our home since 2010.",
+    },
+    {
+      src: MEDIA.classroomPrimary,
+      title: "Primary Classroom",
+      caption: "Small classes, large windows, deep learning.",
+    },
+    {
+      src: MEDIA.classroomSecondary,
+      title: "Senior Classroom",
+      caption: "Where WAEC, NECO and university futures are shaped.",
+    },
+    {
+      src: MEDIA.library,
+      title: "School Library",
+      caption: "Over 18,000 volumes and quiet space to think.",
+    },
+    {
+      src: MEDIA.science,
+      title: "Science Centre",
+      caption: "Three labs — biology, chemistry, physics — all equipped.",
+    },
+    {
+      src: MEDIA.coding,
+      title: "Computer Lab",
+      caption: "Coding, robotics, and our FIRST LEGO competition team.",
+    },
+    {
+      src: MEDIA.football,
+      title: "Sports Field",
+      caption: "Football, athletics, and Inter-house Sports every March.",
+    },
+    {
+      src: MEDIA.drama,
+      title: "Performing Arts",
+      caption: "Two full theatre productions a year, plus dance and music.",
+    },
+    {
+      src: MEDIA.nursery,
+      title: "Nursery Wing",
+      caption: "Bright, playful, gentle — a soft landing for our youngest.",
+    },
+    {
+      src: MEDIA.studentsGroup,
+      title: "School Life",
+      caption: "Friendships, laughter, and a community that lasts.",
+    },
   ];
 
   const [idx, setIdx] = useState<number>(0);
   const [playing, setPlaying] = useState<boolean>(true);
 
-  const goto = React.useCallback((i: number) => setIdx(((i % tour.length) + tour.length) % tour.length), [tour.length]);
+  const goto = React.useCallback(
+    (i: number) => setIdx(((i % tour.length) + tour.length) % tour.length),
+    [tour.length],
+  );
   const next = React.useCallback(() => goto(idx + 1), [idx, goto]);
   const prev = React.useCallback(() => goto(idx - 1), [idx, goto]);
 
@@ -277,30 +335,35 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === ' ') {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === " ") {
         e.preventDefault();
         setPlaying((p) => !p);
       }
     };
-    document.body.style.overflow = 'hidden';
-    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = '';
-      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
     };
   }, [open, next, prev, onClose]);
 
   const thumbStripRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!thumbStripRef.current) return;
-    const el = thumbStripRef.current.querySelector(`.tour-thumb[data-i="${idx}"]`) as HTMLElement;
+    const el = thumbStripRef.current.querySelector(
+      `.tour-thumb[data-i="${idx}"]`,
+    ) as HTMLElement;
     if (el) {
       const strip = thumbStripRef.current;
       const elLeft = el.offsetLeft - strip.offsetLeft;
-      strip.scrollTo({ left: elLeft - strip.clientWidth / 2 + el.clientWidth / 2, behavior: 'smooth' });
+      strip.scrollTo({
+        left: elLeft - strip.clientWidth / 2 + el.clientWidth / 2,
+        behavior: "smooth",
+      });
     }
   }, [idx]);
 
@@ -308,7 +371,10 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
 
   return (
     <div className="tour-modal" onClick={onClose}>
-      <div className="tour-modal-inner slideshow" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="tour-modal-inner slideshow"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="tour-header">
           <div>
             <div className="tour-eyebrow">Virtual Tour · Photo Slideshow</div>
@@ -316,10 +382,19 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
           </div>
           <div className="tour-header-right">
             <div className="tour-counter">
-              {String(idx + 1).padStart(2, '0')} / {String(tour.length).padStart(2, '0')}
+              {String(idx + 1).padStart(2, "0")} /{" "}
+              {String(tour.length).padStart(2, "0")}
             </div>
             <button className="tour-close" onClick={onClose} aria-label="Close">
-              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
+              <svg
+                viewBox="0 0 24 24"
+                width="22"
+                height="22"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+              >
                 <path d="M6 6 L18 18 M18 6 L6 18" />
               </svg>
             </button>
@@ -328,7 +403,10 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
 
         <div className="tour-stage slideshow-stage">
           {tour.map((s, i) => (
-            <div key={i} className={`tour-slide ${idx === i ? 'active' : idx > i ? 'before' : 'after'}`}>
+            <div
+              key={i}
+              className={`tour-slide ${idx === i ? "active" : idx > i ? "before" : "after"}`}
+            >
               <img src={s.src} alt={s.title} />
             </div>
           ))}
@@ -337,7 +415,7 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
           <div
             className="tour-progress"
             key={`p-${idx}-${playing}`}
-            style={{ animationPlayState: playing ? 'running' : 'paused' }}
+            style={{ animationPlayState: playing ? "running" : "paused" }}
           ></div>
 
           {/* Caption */}
@@ -347,36 +425,77 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({ open, onClos
           </div>
 
           {/* Nav Arrows */}
-          <button className="tour-nav prev" onClick={prev} aria-label="Previous">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <button
+            className="tour-nav prev"
+            onClick={prev}
+            aria-label="Previous"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="22"
+              height="22"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M15 18 L9 12 L15 6" />
             </svg>
           </button>
           <button className="tour-nav next" onClick={next} aria-label="Next">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              width="22"
+              height="22"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M9 18 L15 12 L9 6" />
             </svg>
           </button>
 
           {/* Play/Pause */}
-          <button className="tour-playpause" onClick={() => setPlaying((p) => !p)} aria-label={playing ? 'Pause' : 'Play'}>
+          <button
+            className="tour-playpause"
+            onClick={() => setPlaying((p) => !p)}
+            aria-label={playing ? "Pause" : "Play"}
+          >
             {playing ? (
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
                 <rect x="6" y="5" width="4" height="14" />
                 <rect x="14" y="5" width="4" height="14" />
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <svg
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+              >
                 <path d="M7 4 L20 12 L7 20 Z" />
               </svg>
             )}
-            <span>{playing ? 'Pause' : 'Play'}</span>
+            <span>{playing ? "Pause" : "Play"}</span>
           </button>
         </div>
 
         <div className="tour-thumbs" ref={thumbStripRef}>
           {tour.map((s, i) => (
-            <div key={i} className={`tour-thumb ${idx === i ? 'active' : ''}`} data-i={i} onClick={() => setIdx(i)}>
+            <div
+              key={i}
+              className={`tour-thumb ${idx === i ? "active" : ""}`}
+              data-i={i}
+              onClick={() => setIdx(i)}
+            >
               <img src={s.src} alt={s.title} />
             </div>
           ))}

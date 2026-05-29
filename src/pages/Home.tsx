@@ -189,9 +189,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
       <section className="section">
         <div className="container text-center">
           <span className="eyebrow">What We Stand For</span>
-          <h2 className="section-heading heading-line">
-            Built on Four Pillars
-          </h2>
+          <h2 className="section-heading underline">Built on Four Pillars</h2>
           <p className="section-sub">
             Everything we do at SoarHigh is guided by four core commitments to
             every child in our care.
@@ -224,7 +222,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
           <div>
             <span className="eyebrow">Recognition</span>
             <h2
-              className="section-heading heading-line-left"
+              className="section-heading underline-left"
               style={{ textAlign: "left" }}
             >
               Award-Winning.
@@ -314,7 +312,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
       <section className="section" style={{ background: "var(--warm-white)" }}>
         <div className="container text-center">
           <span className="eyebrow">Academic Levels</span>
-          <h2 className="section-heading heading-line">
+          <h2 className="section-heading underline">
             Three Levels of Excellence
           </h2>
           <p className="section-sub">
@@ -401,9 +399,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
       <section className="section" style={{ background: "var(--warm-white)" }}>
         <div className="container text-center">
           <span className="eyebrow">Parent Voices</span>
-          <h2 className="section-heading heading-line">
-            What Parents Are Saying
-          </h2>
+          <h2 className="section-heading underline">What Parents Are Saying</h2>
         </div>
         <div className="container" style={{ marginTop: 56 }}>
           <div className="grid grid-3">

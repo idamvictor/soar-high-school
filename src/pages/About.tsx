@@ -104,7 +104,7 @@ const About: React.FC<AboutProps> = ({ navigate }) => {
               <div className="story-text">
                 <span className="eyebrow">Our Story</span>
                 <h2
-                  className="section-heading heading-line-left"
+                  className="section-heading underline-left"
                   style={{ textAlign: "left" }}
                 >
                   Fifteen Years of Soaring
@@ -194,9 +194,7 @@ const About: React.FC<AboutProps> = ({ navigate }) => {
       <section className="section">
         <div className="container text-center">
           <span className="eyebrow">Core Values</span>
-          <h2 className="section-heading heading-line">
-            The Values We Live By
-          </h2>
+          <h2 className="section-heading underline">The Values We Live By</h2>
           <p className="section-sub">
             Six commitments, repeated daily, until they become who our students
             are.
@@ -253,7 +251,7 @@ const About: React.FC<AboutProps> = ({ navigate }) => {
       <section className="section" style={{ background: "var(--warm-white)" }}>
         <div className="container text-center">
           <span className="eyebrow">Our Leadership</span>
-          <h2 className="section-heading heading-line">Meet Our Leadership</h2>
+          <h2 className="section-heading underline">Meet Our Leadership</h2>
           <p className="section-sub">
             Dedicated educators committed to your child's success.
           </p>
@@ -288,9 +286,7 @@ const About: React.FC<AboutProps> = ({ navigate }) => {
       <section className="section">
         <div className="container text-center">
           <span className="eyebrow">Affiliations</span>
-          <h2 className="section-heading heading-line">
-            Recognised & Accredited
-          </h2>
+          <h2 className="section-heading underline">Recognised & Accredited</h2>
         </div>
         <div className="container" style={{ marginTop: 48 }}>
           <div className="accred-row">

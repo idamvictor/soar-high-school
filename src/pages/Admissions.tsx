@@ -230,9 +230,7 @@ const Admissions: React.FC<AdmissionsProps> = ({ navigate }) => {
       <section className="section" style={{ background: "var(--warm-white)" }}>
         <div className="container text-center">
           <span className="eyebrow">How to Apply</span>
-          <h2 className="section-heading heading-line">
-            The Admissions Process
-          </h2>
+          <h2 className="section-heading underline">The Admissions Process</h2>
           <p className="section-sub">
             Five clear steps, from first enquiry to first day of school.
           </p>
@@ -260,7 +258,7 @@ const Admissions: React.FC<AdmissionsProps> = ({ navigate }) => {
       <section className="section">
         <div className="container text-center">
           <span className="eyebrow">Entry Requirements</span>
-          <h2 className="section-heading heading-line">What You'll Need</h2>
+          <h2 className="section-heading underline">What You'll Need</h2>
         </div>
         <div className="container" style={{ marginTop: 56 }}>
           <div className="grid grid-3 req-grid">
@@ -326,9 +324,7 @@ const Admissions: React.FC<AdmissionsProps> = ({ navigate }) => {
       <section id="enquiry" className="section">
         <div className="container text-center">
           <span className="eyebrow">Get Started</span>
-          <h2 className="section-heading heading-line">
-            Start Your Application
-          </h2>
+          <h2 className="section-heading underline">Start Your Application</h2>
           <p className="section-sub">
             Our admissions team will respond within one business day.
           </p>
@@ -462,7 +458,7 @@ const Admissions: React.FC<AdmissionsProps> = ({ navigate }) => {
       <section className="section" style={{ background: "var(--warm-white)" }}>
         <div className="container text-center">
           <span className="eyebrow">FAQs</span>
-          <h2 className="section-heading heading-line">
+          <h2 className="section-heading underline">
             Frequently Asked Questions
           </h2>
         </div>

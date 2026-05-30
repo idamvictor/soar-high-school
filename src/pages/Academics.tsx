@@ -255,66 +255,6 @@ const Academics: React.FC<AcademicsProps> = ({ navigate }) => {
         </div>
       </section>
 
-      {/* Academic Calendar */}
-      <section className="calendar-section">
-        <div className="container text-center">
-          <span className="eyebrow" style={{ color: "var(--gold)" }}>
-            Calendar
-          </span>
-          <h2 style={{ color: "white", fontSize: "clamp(32px, 4vw, 44px)" }}>
-            Academic Calendar 2025/26
-          </h2>
-        </div>
-        <div className="container" style={{ marginTop: 48 }}>
-          <div className="grid grid-3 term-grid">
-            {[
-              {
-                term: "First Term",
-                dates: "8 Sept – 19 Dec 2025",
-                events: [
-                  "Open Day · 27 Sept",
-                  "Mid-term break · 27 Oct",
-                  "End-of-term exams · 8 Dec",
-                ],
-              },
-              {
-                term: "Second Term",
-                dates: "12 Jan – 10 Apr 2026",
-                events: [
-                  "Cultural Day · 14 Feb",
-                  "Inter-house Sports · 6 Mar",
-                  "End-of-term exams · 30 Mar",
-                ],
-              },
-              {
-                term: "Third Term",
-                dates: "4 May – 24 Jul 2026",
-                events: [
-                  "Graduation Week · 13 Jul",
-                  "WAEC final exams · May–Jun",
-                  "Speech & Prize Day · 24 Jul",
-                ],
-              },
-            ].map((t, i) => (
-              <Reveal key={i} delay={i * 130}>
-                <div className="term-card">
-                  <div className="term-num">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <h4>{t.term}</h4>
-                  <div className="term-dates">{t.dates}</div>
-                  <ul>
-                    {t.events.map((e, j) => (
-                      <li key={j}>{e}</li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Results */}
       <section className="section" style={{ background: "var(--warm-white)" }}>
         <div className="container text-center">

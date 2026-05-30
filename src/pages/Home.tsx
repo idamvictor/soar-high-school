@@ -378,19 +378,11 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
             our science labs and library to our sports complex and arts centre.
           </p>
           <button
-            className="play-orb"
-            aria-label="Play virtual tour"
+            className="btn btn-gold btn-lg"
+            style={{ marginTop: 40, minWidth: 240 }}
             onClick={() => setTourOpen(true)}
           >
-            <span className="play-orb-ring"></span>
-            <span className="play-orb-ring outer"></span>
-            <Icon.play width={36} height={36} className="ml-1" />
-          </button>
-          <button
-            className="btn btn-outline-white"
-            onClick={() => setTourOpen(true)}
-          >
-            Start Virtual Tour
+            Start Virtual Tour <Icon.arrow width={18} height={18} />
           </button>
         </div>
       </section>

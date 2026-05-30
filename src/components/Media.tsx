@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, ReactNode } from "react";
 import { MEDIA } from "../data/media";
+import { Icon } from "./Icons";
 
 interface ImgProps {
   src?: string;
@@ -497,6 +498,256 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({
               onClick={() => setIdx(i)}
             >
               <img src={s.src} alt={s.title} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+interface SlideshowModalProps {
+  open: boolean;
+  onClose: () => void;
+  items: { src: string; title: string; caption?: string; date?: string }[];
+  title: string;
+  eyebrow?: string;
+  initialIdx?: number;
+  isVideo?: boolean;
+}
+
+export const SlideshowModal: React.FC<SlideshowModalProps> = ({
+  open,
+  onClose,
+  items,
+  title,
+  eyebrow = "Gallery · Photo Slideshow",
+  initialIdx = 0,
+  isVideo = false,
+}) => {
+  const [idx, setIdx] = useState<number>(initialIdx);
+  const [playing, setPlaying] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (open) {
+      setIdx(initialIdx);
+      setPlaying(false);
+    }
+  }, [open, initialIdx]);
+
+  const goto = React.useCallback(
+    (i: number) => setIdx(((i % items.length) + items.length) % items.length),
+    [items.length],
+  );
+  const next = React.useCallback(() => goto(idx + 1), [idx, goto]);
+  const prev = React.useCallback(() => goto(idx - 1), [idx, goto]);
+
+  useEffect(() => {
+    if (!open || !playing || isVideo) return;
+    const t = setInterval(next, 4200);
+    return () => clearInterval(t);
+  }, [open, playing, next, isVideo]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === " " && !isVideo) {
+        e.preventDefault();
+        setPlaying((p) => !p);
+      }
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open, next, prev, onClose, isVideo]);
+
+  const thumbStripRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!thumbStripRef.current) return;
+    const el = thumbStripRef.current.querySelector(
+      `.tour-thumb[data-i="${idx}"]`,
+    ) as HTMLElement;
+    if (el) {
+      const strip = thumbStripRef.current;
+      const elLeft = el.offsetLeft - strip.offsetLeft;
+      strip.scrollTo({
+        left: elLeft - strip.clientWidth / 2 + el.clientWidth / 2,
+        behavior: "smooth",
+      });
+    }
+  }, [idx]);
+
+  if (!open) return null;
+
+  return (
+    <div className="tour-modal" onClick={onClose}>
+      <div
+        className="tour-modal-inner slideshow"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="tour-header">
+          <div>
+            <div className="tour-eyebrow">{eyebrow}</div>
+            <h3>{title}</h3>
+          </div>
+          <div className="tour-header-right">
+            <div className="tour-counter">
+              {String(idx + 1).padStart(2, "0")} /{" "}
+              {String(items.length).padStart(2, "0")}
+            </div>
+            <button className="tour-close" onClick={onClose} aria-label="Close">
+              <svg
+                viewBox="0 0 24 24"
+                width="22"
+                height="22"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+              >
+                <path d="M6 6 L18 18 M18 6 L6 18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div className="tour-stage slideshow-stage">
+          {items.map((s, i) => (
+            <div
+              key={i}
+              className={`tour-slide ${idx === i ? "active" : idx > i ? "before" : "after"}`}
+            >
+              {isVideo ? (
+                <video
+                  key={s.src}
+                  src={s.src}
+                  controls
+                  autoPlay={idx === i}
+                  muted
+                  playsInline
+                  className="w-full h-full object-contain bg-black"
+                />
+              ) : (
+                <img src={s.src} alt={s.title} />
+              )}
+            </div>
+          ))}
+
+          {playing && !isVideo && (
+            <div
+              className="tour-progress"
+              key={`p-${idx}-${playing}`}
+              style={{ animationPlayState: playing ? "running" : "paused" }}
+            ></div>
+          )}
+
+          <div className="tour-caption" key={`c-${idx}`}>
+            <div className="tour-caption-title">{items[idx].title}</div>
+            {items[idx].caption && (
+              <div className="tour-caption-body">{items[idx].caption}</div>
+            )}
+            {items[idx].date && (
+              <div
+                className="tour-caption-body"
+                style={{ color: "var(--gold)", fontWeight: 600 }}
+              >
+                {items[idx].date}
+              </div>
+            )}
+          </div>
+
+          <button
+            className="tour-nav prev"
+            onClick={prev}
+            aria-label="Previous"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="22"
+              height="22"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M15 18 L9 12 L15 6" />
+            </svg>
+          </button>
+          <button className="tour-nav next" onClick={next} aria-label="Next">
+            <svg
+              viewBox="0 0 24 24"
+              width="22"
+              height="22"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 18 L15 12 L9 6" />
+            </svg>
+          </button>
+
+          {!isVideo && (
+            <button
+              className="tour-playpause"
+              onClick={() => setPlaying((p) => !p)}
+              aria-label={playing ? "Pause" : "Play"}
+            >
+              {playing ? (
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                >
+                  <rect x="6" y="5" width="4" height="14" />
+                  <rect x="14" y="5" width="4" height="14" />
+                </svg>
+              ) : (
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                >
+                  <path d="M7 4 L20 12 L7 20 Z" />
+                </svg>
+              )}
+              <span>{playing ? "Pause" : "Play"}</span>
+            </button>
+          )}
+        </div>
+
+        <div className="tour-thumbs" ref={thumbStripRef}>
+          {items.map((s, i) => (
+            <div
+              key={i}
+              className={`tour-thumb ${idx === i ? "active" : ""}`}
+              data-i={i}
+              onClick={() => setIdx(i)}
+            >
+              {isVideo ? (
+                <div className="relative w-full h-full">
+                  <img
+                    src={MEDIA[`v${(i % 3) + 1}`]}
+                    alt={s.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                    <Icon.play className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+              ) : (
+                <img src={s.src} alt={s.title} />
+              )}
             </div>
           ))}
         </div>

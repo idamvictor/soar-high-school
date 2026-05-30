@@ -283,43 +283,6 @@ const Admissions: React.FC<AdmissionsProps> = ({ navigate }) => {
         </div>
       </section>
 
-      {/* Dates */}
-      <section className="dates-section">
-        <div className="container text-center">
-          <span className="eyebrow" style={{ color: "var(--gold)" }}>
-            Calendar
-          </span>
-          <h2
-            style={{
-              color: "var(--gold)",
-              fontSize: "clamp(32px, 4vw, 44px)",
-            }}
-          >
-            Important Admissions Dates
-          </h2>
-        </div>
-        <div className="container" style={{ marginTop: 48 }}>
-          <table className="dates-table">
-            <thead>
-              <tr>
-                <th>Event</th>
-                <th>Date</th>
-                <th>Level</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dates.map((d, i) => (
-                <tr key={i}>
-                  <td>{d.event}</td>
-                  <td className="date-col">{d.date}</td>
-                  <td>{d.level}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
       {/* Enquiry form */}
       <section id="enquiry" className="section">
         <div className="container text-center">

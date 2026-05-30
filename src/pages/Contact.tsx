@@ -381,50 +381,6 @@ const Contact: React.FC<ContactProps> = ({ navigate }) => {
         </div>
       </section>
 
-      {/* Quick Links */}
-      <section className="quicklinks-section">
-        <div className="container">
-          <div className="grid grid-3 quicklinks-grid">
-            <a href="#" className="quick-box">
-              <div className="quick-icon">
-                <Icon.download />
-              </div>
-              <h4>Download Prospectus</h4>
-              <p>The full 2025/26 SoarHigh prospectus, in PDF.</p>
-              <span className="quick-arrow">
-                <Icon.arrow />
-              </span>
-            </a>
-            <a
-              href="#"
-              className="quick-box"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate("admissions");
-              }}
-            >
-              <div className="quick-icon">
-                <Icon.formIcon />
-              </div>
-              <h4>Apply Online</h4>
-              <p>Submit your child's enquiry in under 5 minutes.</p>
-              <span className="quick-arrow">
-                <Icon.arrow />
-              </span>
-            </a>
-            <a href="#" className="quick-box">
-              <div className="quick-icon">
-                <Icon.calendar />
-              </div>
-              <h4>Book a School Visit</h4>
-              <p>See the school for yourself — open every Wednesday.</p>
-              <span className="quick-arrow">
-                <Icon.arrow />
-              </span>
-            </a>
-          </div>
-        </div>
-      </section>
     </main>
   );
 };

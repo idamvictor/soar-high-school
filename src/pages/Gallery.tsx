@@ -1,6 +1,6 @@
 import React from "react";
 import { NavigateFn } from "../types";
-import { SlidingHero, Reveal, Img } from "../components/Media";
+import { SlidingHero, Reveal, Img, SlideshowModal } from "../components/Media";
 import { MEDIA } from "../data/media";
 import { Icon } from "../components/Icons";
 
@@ -18,6 +18,9 @@ const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
     "School Life",
   ];
   const [active, setActive] = React.useState("All");
+  const [slideshowOpen, setSlideshowOpen] = React.useState(false);
+  const [videoOpen, setVideoOpen] = React.useState(false);
+  const [initialIdx, setInitialIdx] = React.useState(0);
 
   const photos = [
     {
@@ -130,11 +133,39 @@ const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
   const filtered =
     active === "All" ? photos : photos.filter((p) => p.cat === active);
 
+  const openSlideshow = (idx: number) => {
+    setInitialIdx(idx);
+    setSlideshowOpen(true);
+  };
+
   const videos = [
-    { title: "Graduation Day 2024", duration: "4:32", src: MEDIA.v1 },
-    { title: "Annual Sports Day 2024", duration: "6:18", src: MEDIA.v2 },
-    { title: "Cultural Day Showcase 2023", duration: "3:55", src: MEDIA.v3 },
+    {
+      title: "Graduation Day 2024",
+      duration: "4:32",
+      src: MEDIA.v1,
+      videoUrl:
+        "https://videos.pexels.com/video-files/3130284/3130284-uhd_2560_1440_30fps.mp4",
+    },
+    {
+      title: "Annual Sports Day 2024",
+      duration: "6:18",
+      src: MEDIA.v2,
+      videoUrl:
+        "https://videos.pexels.com/video-files/4763824/4763824-hd_1920_1080_24fps.mp4",
+    },
+    {
+      title: "Cultural Day Showcase 2023",
+      duration: "3:55",
+      src: MEDIA.v3,
+      videoUrl:
+        "https://videos.pexels.com/video-files/4255146/4255146-hd_1920_1080_24fps.mp4",
+    },
   ];
+
+  const openVideo = (idx: number) => {
+    setInitialIdx(idx);
+    setVideoOpen(true);
+  };
 
   const achievements = [
     {
@@ -199,7 +230,11 @@ const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
         <div className="container">
           <div className="masonry">
             {filtered.map((p, i) => (
-              <div key={`${active}-${i}`} className={`masonry-tile ${p.span}`}>
+              <div
+                key={`${active}-${i}`}
+                className={`masonry-tile ${p.span}`}
+                onClick={() => openSlideshow(i)}
+              >
                 <Img src={p.src} alt={p.title} label={p.cat} />
                 <div className="masonry-overlay">
                   <div className="overlay-title">{p.title}</div>
@@ -227,7 +262,7 @@ const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
           <div className="grid grid-3 video-grid">
             {videos.map((v, i) => (
               <Reveal key={i} delay={i * 130}>
-                <div className="video-card">
+                <div className="video-card" onClick={() => openVideo(i)}>
                   <div className="video-thumb img-slot">
                     <Img src={v.src} alt={v.title} label="Video" />
                     <button className="video-play">
@@ -264,16 +299,32 @@ const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
               </Reveal>
             ))}
           </div>
-          <div style={{ textAlign: "center", marginTop: 56 }}>
-            <button
-              className="btn btn-gold"
-              onClick={() => navigate("contact")}
-            >
-              Load More Achievements <Icon.arrow />
-            </button>
-          </div>
         </div>
       </section>
+
+      {/* Photo Slideshow Modal */}
+      <SlideshowModal
+        open={slideshowOpen}
+        onClose={() => setSlideshowOpen(false)}
+        items={filtered}
+        title={`Gallery · ${active}`}
+        initialIdx={initialIdx}
+      />
+
+      {/* Video Slideshow Modal */}
+      <SlideshowModal
+        open={videoOpen}
+        onClose={() => setVideoOpen(false)}
+        items={videos.map((v) => ({
+          src: v.videoUrl,
+          title: v.title,
+          caption: `Duration: ${v.duration}`,
+        }))}
+        title="Video Highlights"
+        eyebrow="Gallery · Video Showcase"
+        initialIdx={initialIdx}
+        isVideo={true}
+      />
     </main>
   );
 };

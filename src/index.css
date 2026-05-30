@@ -3276,26 +3276,11 @@ textarea.form-control {
   background: linear-gradient(180deg, transparent, var(--gold), transparent);
   transform: translateX(-50%);
 }
-@media (max-width: 700px) {
-  .day-line {
-    left: 24px;
-  }
-}
 .day-entry {
   display: grid;
   grid-template-columns: 1fr 56px 1fr;
   margin-bottom: 32px;
   align-items: center;
-}
-@media (max-width: 700px) {
-  .day-entry {
-    grid-template-columns: 56px 1fr;
-  }
-  .day-entry.left .day-card,
-  .day-entry.right .day-card {
-    grid-column: 2;
-    text-align: left;
-  }
 }
 .day-entry.left .day-card {
   grid-column: 1;
@@ -3316,8 +3301,41 @@ textarea.form-control {
   justify-self: center;
 }
 @media (max-width: 700px) {
+  .day-timeline {
+    padding-left: 44px;
+  }
+  .day-line {
+    left: 16px;
+    transform: none;
+  }
+  .day-entry {
+    display: block;
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .day-entry.left .day-card,
+  .day-entry.right .day-card {
+    grid-column: unset;
+    text-align: left;
+  }
   .day-dot {
-    grid-column: 1;
+    position: absolute;
+    left: -36px;
+    top: 5px;
+    grid-column: unset;
+    justify-self: unset;
+  }
+  .day-card {
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    border-left: 2px solid var(--gold);
+  }
+  .day-time {
+    font-size: 17px;
+  }
+  .day-card h4 {
+    font-size: 16px;
   }
 }
 .day-card {

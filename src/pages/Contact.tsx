@@ -1,6 +1,6 @@
 import React from "react";
 import { NavigateFn } from "../types";
-import { SlidingHero, Reveal } from "../components/Media";
+import { SlidingHero } from "../components/Media";
 import { MEDIA } from "../data/media";
 import { Icon } from "../components/Icons";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -278,7 +278,6 @@ const Contact: React.FC<ContactProps> = ({ navigate }) => {
               </Marker>
             </MapContainer>
           </div>
-          
         </div>
       </section>
     </main>

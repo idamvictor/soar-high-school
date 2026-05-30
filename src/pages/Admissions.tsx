@@ -88,35 +88,6 @@ const Admissions: React.FC<AdmissionsProps> = ({ navigate }) => {
     },
   ];
 
-  const dates = [
-    {
-      event: "Online Enquiry Window Opens",
-      date: "1 Jan 2026",
-      level: "All levels",
-    },
-    {
-      event: "First Round Entrance Assessment",
-      date: "15 Feb 2026",
-      level: "Primary & Secondary",
-    },
-    {
-      event: "First Round Offer Letters Sent",
-      date: "10 Mar 2026",
-      level: "All levels",
-    },
-    {
-      event: "Final Acceptance Deadline",
-      date: "30 Apr 2026",
-      level: "All levels",
-    },
-    {
-      event: "Second Round Assessment (subject to space)",
-      date: "15 May 2026",
-      level: "Primary & Secondary",
-    },
-    { event: "Term Begins", date: "8 Sept 2026", level: "All levels" },
-  ];
-
   const faqs = [
     {
       q: "What is the school fees structure?",

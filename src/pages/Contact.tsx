@@ -3,12 +3,29 @@ import { NavigateFn } from "../types";
 import { SlidingHero, Reveal } from "../components/Media";
 import { MEDIA } from "../data/media";
 import { Icon } from "../components/Icons";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+// Fix for Leaflet default icon issues in React/Vite
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import markerRetina from "leaflet/dist/images/marker-icon-2x.png";
+
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerRetina,
+  shadowUrl: markerShadow,
+});
 
 interface ContactProps {
   navigate: NavigateFn;
 }
 
 const Contact: React.FC<ContactProps> = ({ navigate }) => {
+  const position: [number, number] = [6.4468, 7.5115]; // Enugu, Independence Layout
+
   const [form, setForm] = React.useState({
     name: "",
     email: "",
@@ -58,7 +75,10 @@ const Contact: React.FC<ContactProps> = ({ navigate }) => {
               <span className="eyebrow">Visit, Call or Write</span>
               <h2
                 className="section-heading underline-left"
-                style={{ textAlign: "left", fontSize: "clamp(28px, 3.5vw, 40px)" }}
+                style={{
+                  textAlign: "left",
+                  fontSize: "clamp(28px, 3.5vw, 40px)",
+                }}
               >
                 Reach Us
               </h2>
@@ -91,7 +111,9 @@ const Contact: React.FC<ContactProps> = ({ navigate }) => {
                   </div>
                   <div>
                     <div className="info-label">Email</div>
-                    <div className="info-value">info@soarhighschools.edu.ng</div>
+                    <div className="info-value">
+                      info@soarhighschools.edu.ng
+                    </div>
                   </div>
                 </div>
                 <div className="info-row">
@@ -238,149 +260,27 @@ const Contact: React.FC<ContactProps> = ({ navigate }) => {
         </div>
         <div className="container" style={{ marginTop: 48 }}>
           <div className="map-wrap">
-            <svg
-              className="map-svg"
-              viewBox="0 0 1200 480"
-              preserveAspectRatio="xMidYMid slice"
+            <MapContainer
+              center={position}
+              zoom={15}
+              scrollWheelZoom={false}
+              style={{ height: "480px", width: "100%", zIndex: 1 }}
             >
-              <defs>
-                <pattern
-                  id="grid"
-                  width="60"
-                  height="60"
-                  patternUnits="userSpaceOnUse"
-                >
-                  <path
-                    d="M 60 0 L 0 0 0 60"
-                    fill="none"
-                    stroke="rgba(201,168,76,0.06)"
-                    strokeWidth="1"
-                  />
-                </pattern>
-              </defs>
-              <rect width="1200" height="480" fill="#0a2463" />
-              <rect width="1200" height="480" fill="url(#grid)" />
-              {/* Roads */}
-              <path
-                d="M0 200 Q 300 180, 600 230 T 1200 220"
-                stroke="rgba(201,168,76,0.25)"
-                strokeWidth="2"
-                fill="none"
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <path
-                d="M0 320 Q 400 280, 700 340 T 1200 310"
-                stroke="rgba(201,168,76,0.18)"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M300 0 L 320 480"
-                stroke="rgba(201,168,76,0.15)"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M800 0 L 780 480"
-                stroke="rgba(201,168,76,0.15)"
-                strokeWidth="2"
-                fill="none"
-              />
-              <path
-                d="M520 0 L 540 480"
-                stroke="rgba(201,168,76,0.12)"
-                strokeWidth="2"
-                fill="none"
-              />
-              {/* Blocks */}
-              {[
-                [80, 80],
-                [180, 90],
-                [380, 60],
-                [420, 150],
-                [560, 80],
-                [660, 140],
-                [850, 80],
-                [920, 140],
-                [1050, 90],
-                [140, 260],
-                [260, 280],
-                [400, 260],
-                [600, 260],
-                [760, 260],
-                [920, 260],
-                [1060, 260],
-                [180, 400],
-                [340, 380],
-                [600, 400],
-                [840, 380],
-                [1020, 400],
-              ].map((b, i) => (
-                <rect
-                  key={i}
-                  x={b[0]}
-                  y={b[1]}
-                  width="60"
-                  height="40"
-                  rx="3"
-                  fill="rgba(255,255,255,0.04)"
-                  stroke="rgba(201,168,76,0.18)"
-                />
-              ))}
-              {/* Pin */}
-              <g transform="translate(600 240)">
-                <circle r="44" fill="rgba(201,168,76,0.16)">
-                  <animate
-                    attributeName="r"
-                    values="40;52;40"
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    values="0.4;0;0.4"
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-                <circle r="18" fill="#c9a84c" />
-                <path
-                  d="M0 -8 L0 -22 M -8 -8 L 0 -22 L 8 -8"
-                  stroke="#0a2463"
-                  strokeWidth="2"
-                  fill="none"
-                />
-                <text
-                  x="0"
-                  y="40"
-                  fill="#c9a84c"
-                  fontFamily="Inter, sans-serif"
-                  fontSize="13"
-                  fontWeight="600"
-                  textAnchor="middle"
-                >
-                  SoarHigh Schools
-                </text>
-                <text
-                  x="0"
-                  y="58"
-                  fill="rgba(255,255,255,0.7)"
-                  fontFamily="Inter, sans-serif"
-                  fontSize="11"
-                  textAnchor="middle"
-                >
+              <Marker position={position}>
+                <Popup>
+                  <strong>SoarHigh Schools</strong> <br />
                   12 Independence Layout, Enugu
-                </text>
-              </g>
-            </svg>
+                </Popup>
+              </Marker>
+            </MapContainer>
           </div>
-          <div style={{ textAlign: "center", marginTop: 32 }}>
-            <a href="#" className="btn btn-gold">
-              Get Directions <Icon.arrow />
-            </a>
-          </div>
+          
         </div>
       </section>
-
     </main>
   );
 };

@@ -15,6 +15,12 @@ export const MEDIA: Record<string, string> = {
   logoNECO: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555382/download_bn3vo5.jpg",
   logoAPSN: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555429/download_r3m9ub.jpg",
   logoCAIE: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555452/download_nje82c.png",
+  academicsHero1: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781556249/619745874_17845971243672214_6653399892148898739_n_jkasnq.webp",
+  academicsHero2: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781556356/621643472_17845971303672214_6756475492972041477_n_vvduhn.webp",
+  academicsHero3: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554716/622657306_17847024918672214_5277317884452179474_n_xj0kza.webp",
+  academicsHero4: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554643/626271176_17848033554672214_3234409566218883644_n_wwqq3t.webp",
+  nurseryImage: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781556556/619538319_17845971267672214_8910736205936330114_n_bqcabc.webp",
+  primaryImage: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554716/622657306_17847024918672214_5277317884452179474_n_xj0kza.webp",
 
   // Generic students / classrooms
   studentsUniform: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80",

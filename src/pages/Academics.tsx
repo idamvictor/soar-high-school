@@ -77,10 +77,10 @@ const Academics: React.FC<AcademicsProps> = ({ navigate }) => {
         breadcrumb="Academics"
         navigate={navigate}
         images={[
-          MEDIA.classroomPrimary,
-          MEDIA.classroomSecondary,
-          MEDIA.nursery,
-          MEDIA.library,
+          MEDIA.academicsHero1,
+          MEDIA.academicsHero2,
+          MEDIA.academicsHero3,
+          MEDIA.academicsHero4,
         ]}
       />
 
@@ -112,7 +112,11 @@ const Academics: React.FC<AcademicsProps> = ({ navigate }) => {
       {/* Nursery */}
       <section className="programme">
         <div className="programme-img has-img">
-          <Img src={MEDIA.nursery} alt="Nursery learners" label="Nursery" />
+          <Img
+            src={MEDIA.nurseryImage}
+            alt="Nursery learners"
+            label="Nursery"
+          />
         </div>
         <div className="programme-panel navy">
           <span className="eyebrow" style={{ color: "var(--gold)" }}>
@@ -140,7 +144,7 @@ const Academics: React.FC<AcademicsProps> = ({ navigate }) => {
       <section className="programme reverse">
         <div className="programme-img has-img">
           <Img
-            src={MEDIA.classroomPrimary}
+            src={MEDIA.primaryImage}
             alt="Primary classroom"
             label="Primary"
           />

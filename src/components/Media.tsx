@@ -258,52 +258,52 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({
 }) => {
   const tour = [
     {
-      src: MEDIA.schoolBuilding,
+      src: MEDIA.tourMainCampus,
       title: "Main Campus",
       caption: "12 Independence Layout, Enugu — our home since 2010.",
     },
     {
-      src: MEDIA.classroomPrimary,
+      src: MEDIA.tourPrimaryClassroom,
       title: "Primary Classroom",
       caption: "Small classes, large windows, deep learning.",
     },
     {
-      src: MEDIA.classroomSecondary,
+      src: MEDIA.tourSeniorClasses,
       title: "Senior Classroom",
       caption: "Where WAEC, NECO and university futures are shaped.",
     },
     {
-      src: MEDIA.library,
+      src: MEDIA.tourSchoolLibrary,
       title: "School Library",
       caption: "Over 18,000 volumes and quiet space to think.",
     },
     {
-      src: MEDIA.science,
+      src: MEDIA.tourScienceCenter,
       title: "Science Centre",
       caption: "Three labs — biology, chemistry, physics — all equipped.",
     },
     {
-      src: MEDIA.coding,
+      src: MEDIA.tourComputerLab,
       title: "Computer Lab",
       caption: "Coding, robotics, and our FIRST LEGO competition team.",
     },
     {
-      src: MEDIA.football,
+      src: MEDIA.tourSportsField,
       title: "Sports Field",
       caption: "Football, athletics, and Inter-house Sports every March.",
     },
     {
-      src: MEDIA.drama,
+      src: MEDIA.tourPerformingArts,
       title: "Performing Arts",
       caption: "Two full theatre productions a year, plus dance and music.",
     },
     {
-      src: MEDIA.nursery,
+      src: MEDIA.tourNurseryWing,
       title: "Nursery Wing",
       caption: "Bright, playful, gentle — a soft landing for our youngest.",
     },
     {
-      src: MEDIA.studentsGroup,
+      src: MEDIA.tourSchoolLife,
       title: "School Life",
       caption: "Friendships, laughter, and a community that lasts.",
     },
@@ -311,6 +311,7 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({
 
   const [idx, setIdx] = useState<number>(0);
   const [playing, setPlaying] = useState<boolean>(true);
+  const [isFullView, setIsFullView] = useState<boolean>(false);
 
   const goto = React.useCallback(
     (i: number) => setIdx(((i % tour.length) + tour.length) % tour.length),
@@ -320,10 +321,10 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({
   const prev = React.useCallback(() => goto(idx - 1), [idx, goto]);
 
   useEffect(() => {
-    if (!open || !playing) return;
+    if (!open || !playing || isFullView) return;
     const t = setInterval(next, 4200);
     return () => clearInterval(t);
-  }, [open, playing, next]);
+  }, [open, playing, next, isFullView]);
 
   useEffect(() => {
     if (open) {
@@ -335,7 +336,14 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        if (isFullView) {
+          setIsFullView(false);
+        } else {
+          onClose();
+        }
+      }
+      if (isFullView) return;
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
       if (e.key === " ") {
@@ -406,10 +414,34 @@ export const VirtualTourModal: React.FC<VirtualTourModalProps> = ({
             <div
               key={i}
               className={`tour-slide ${idx === i ? "active" : idx > i ? "before" : "after"}`}
+              onClick={() => idx === i && setIsFullView(true)}
+              style={{ cursor: idx === i ? "zoom-in" : "default" }}
             >
               <img src={s.src} alt={s.title} />
             </div>
           ))}
+
+          {/* Full View Overlay */}
+          {isFullView && (
+            <div
+              className="tour-fullview-overlay"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsFullView(false);
+              }}
+            >
+              <div className="tour-fullview-content">
+                <img src={tour[idx].src} alt={tour[idx].title} />
+                <button
+                  className="tour-fullview-close"
+                  onClick={() => setIsFullView(false)}
+                >
+                  <Icon.close width={24} height={24} />
+                  <span>Close Full View</span>
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Progress Bar */}
           <div

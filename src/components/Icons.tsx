@@ -200,6 +200,12 @@ export const Icon: Record<string, React.FC<Partial<IconProps>>> = {
     </svg>
   ),
 
+  close: (props) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M18 6 L6 18 M6 6 L18 18" />
+    </svg>
+  ),
+
   download: (props) => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <path d="M12 3 V15 M7 11 L12 16 L17 11 M5 20 H19" />

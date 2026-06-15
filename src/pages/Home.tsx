@@ -12,11 +12,21 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ navigate }) => {
   const [tourOpen, setTourOpen] = React.useState(false);
   const [heroIdx, setHeroIdx] = React.useState(0);
+  const [bgIdx, setBgIdx] = React.useState(0);
 
   const heroLines = [
     "Where Excellence Takes Flight.",
     "Raising Tomorrow's Leaders.",
     "Rooted in Enugu. Reaching the World.",
+  ];
+
+  const heroImages = [
+    MEDIA.tourMainCampus,
+    MEDIA.tourPrimaryClassroom,
+    MEDIA.tourSeniorClasses,
+    MEDIA.tourSchoolLibrary,
+    MEDIA.tourScienceCenter,
+    MEDIA.tourSportsField,
   ];
 
   const pillars = [
@@ -104,11 +114,18 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
   ];
 
   React.useEffect(() => {
-    const t = setInterval(
+    const t1 = setInterval(
       () => setHeroIdx((i) => (i + 1) % heroLines.length),
       3600,
     );
-    return () => clearInterval(t);
+    const t2 = setInterval(
+      () => setBgIdx((i) => (i + 1) % heroImages.length),
+      5000,
+    );
+    return () => {
+      clearInterval(t1);
+      clearInterval(t2);
+    };
   }, []);
 
   return (
@@ -116,16 +133,13 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
       {/* HERO */}
       <section className="hero">
         <div className="hero-bg">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="hero-bg-video"
-            poster={MEDIA.heroPoster}
-          >
-            <source src={MEDIA.heroVideo} type="video/mp4" />
-          </video>
+          {heroImages.map((img, i) => (
+            <div
+              key={i}
+              className={`hero-bg-img ${bgIdx === i ? "active" : ""}`}
+              style={{ backgroundImage: `url(${img})` }}
+            ></div>
+          ))}
           <div className="hero-bg-tint"></div>
         </div>
 

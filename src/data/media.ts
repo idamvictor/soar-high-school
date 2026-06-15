@@ -1,4 +1,9 @@
+import schoolLogo from "../assets/logo.jpeg";
+
 export const MEDIA: Record<string, string> = {
+  // Brand Assets
+  schoolLogo,
+
   // Hero looping video (Pexels — students raising hands in class)
   heroVideo:
     "https://videos.pexels.com/video-files/8466804/8466804-hd_1920_1080_25fps.mp4",

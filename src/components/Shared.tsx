@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavigateFn, PageDef, Stat } from "../types";
 import { Icon } from "./Icons";
+import { MEDIA } from "../data/media";
 
 export const PAGES: PageDef[] = [
   { id: "home", label: "Home" },
@@ -34,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({ current, navigate }) => {
         {/* Brand */}
         <div onClick={() => navigate("home")} className="brand">
           <div className="brand-crest">
-            <Icon.crest width={22} height={22} />
+            <img src={MEDIA.schoolLogo} alt="SoarHigh Logo" />
           </div>
           <div className="brand-name">SoarHigh Schools</div>
         </div>
@@ -121,7 +122,7 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
         <div>
           <div className="brand" onClick={() => navigate("home")}>
             <div className="brand-crest">
-              <Icon.crest />
+              <img src={MEDIA.schoolLogo} alt="SoarHigh Logo" />
             </div>
             <div className="brand-name">SoarHigh Schools</div>
           </div>

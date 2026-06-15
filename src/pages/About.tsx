@@ -82,10 +82,10 @@ const About: React.FC<AboutProps> = ({ navigate }) => {
         breadcrumb="About Us"
         navigate={navigate}
         images={[
-          MEDIA.schoolBuilding,
-          MEDIA.studentsGroup,
-          MEDIA.library,
-          MEDIA.studentsUniform,
+          MEDIA.aboutHero1,
+          MEDIA.aboutHero2,
+          MEDIA.aboutHero3,
+          MEDIA.aboutHero4,
         ]}
       />
 
@@ -95,7 +95,7 @@ const About: React.FC<AboutProps> = ({ navigate }) => {
           <div className="story-grid">
             <div className="story-img has-img">
               <Img
-                src={MEDIA.schoolBuilding}
+                src={MEDIA.aboutStory}
                 alt="SoarHigh campus"
                 label="Campus building"
               />
@@ -259,17 +259,11 @@ const About: React.FC<AboutProps> = ({ navigate }) => {
         <div className="container" style={{ marginTop: 56 }}>
           <div className="grid grid-4 leader-grid">
             {leaders.map((l, i) => {
-              const photos = [
-                MEDIA.leader1,
-                MEDIA.leader2,
-                MEDIA.leader3,
-                MEDIA.leader4,
-              ];
               return (
                 <Reveal key={i} delay={i * 90}>
                   <div className="leader-card">
                     <div className="leader-photo">
-                      <Img src={photos[i]} alt={l.name} label="Portrait" />
+                      <Img src={MEDIA.leaderDefault} alt={l.name} label="Portrait" />
                     </div>
                     <h4>{l.name}</h4>
                     <div className="leader-title">{l.title}</div>
@@ -294,32 +288,32 @@ const About: React.FC<AboutProps> = ({ navigate }) => {
               {
                 name: "Nigerian Educational Research and Development Council",
                 abbr: "NERDC",
-                img: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&q=80",
+                img: MEDIA.logoNERDC,
               },
               {
                 name: "Enugu State Ministry of Education",
                 abbr: "ESME",
-                img: "https://images.unsplash.com/photo-1568667256549-094345857637?w=600&q=80",
+                img: MEDIA.logoESME,
               },
               {
                 name: "West African Examinations Council",
                 abbr: "WAEC",
-                img: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=600&q=80",
+                img: MEDIA.logoWAEC,
               },
               {
                 name: "National Examinations Council",
                 abbr: "NECO",
-                img: "https://images.unsplash.com/photo-1532153975070-2e9ab71f1b14?w=600&q=80",
+                img: MEDIA.logoNECO,
               },
               {
                 name: "Association of Private Schools Nigeria",
                 abbr: "APSN",
-                img: "https://images.unsplash.com/photo-1581726690015-c9861fa5057f?w=600&q=80",
+                img: MEDIA.logoAPSN,
               },
               {
                 name: "Cambridge Assessment International",
                 abbr: "CAIE",
-                img: "https://images.unsplash.com/photo-1526285759904-71d1170ad7e1?w=600&q=80",
+                img: MEDIA.logoCAIE,
               },
             ].map((a, i) => (
               <Reveal key={i} delay={i * 80}>

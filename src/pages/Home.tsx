@@ -271,7 +271,7 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
       {/* ABOUT PREVIEW */}
       <section className="about-preview">
         <div className="img-fill">
-          <Img src={MEDIA.heroPoster} alt="SoarHigh Schools" label="About Us" />
+          <Img src={MEDIA.aboutImage} alt="SoarHigh Schools" label="About Us" />
         </div>
         <div className="about-preview-text">
           <span className="eyebrow" style={{ color: "var(--gold)" }}>

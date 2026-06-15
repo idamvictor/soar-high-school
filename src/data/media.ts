@@ -2,6 +2,19 @@ export const MEDIA: Record<string, string> = {
   // Hero looping video (Pexels — students raising hands in class)
   heroVideo: "https://videos.pexels.com/video-files/8466804/8466804-hd_1920_1080_25fps.mp4",
   heroPoster: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&q=80",
+  aboutImage: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554378/621733689_17846286267672214_555796510794911802_n_qu5uen.webp",
+  aboutHero1: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554378/621733689_17846286267672214_555796510794911802_n_qu5uen.webp",
+  aboutHero2: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554593/625359261_17848033566672214_3102764739821897083_n_jctroz.webp",
+  aboutHero3: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554716/622657306_17847024918672214_5277317884452179474_n_xj0kza.webp",
+  aboutHero4: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554716/622657306_17847024918672214_5277317884452179474_n_xj0kza.webp",
+  aboutStory: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554976/626271175_17850640530672214_9043520815344843866_n_bwzfq2.webp",
+  leaderDefault: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555121/621165806_17846354397672214_3995463644302109593_n_bwzo77.webp",
+  logoNERDC: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555269/download_nx9uih.jpg",
+  logoESME: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555316/download_tplzft.jpg",
+  logoWAEC: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555349/download_dwgcrq.png",
+  logoNECO: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555382/download_bn3vo5.jpg",
+  logoAPSN: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555429/download_r3m9ub.jpg",
+  logoCAIE: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781555452/download_nje82c.png",
 
   // Generic students / classrooms
   studentsUniform: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80",

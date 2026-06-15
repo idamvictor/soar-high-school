@@ -64,7 +64,12 @@ const Tuition: React.FC<TuitionProps> = ({ navigate }) => {
         subtitle="Investing in Your Child's Future."
         breadcrumb="Tuition & Fees"
         navigate={navigate}
-        images={[MEDIA.graduation, MEDIA.studentsUniform, MEDIA.library, MEDIA.classroomSecondary]}
+        images={[
+          MEDIA.academicsHero1,
+          MEDIA.academicsHero2,
+          MEDIA.academicsHero3,
+          MEDIA.academicsHero4,
+        ]}
       />
 
       <section className="section-tight">

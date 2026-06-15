@@ -3,7 +3,7 @@ export const MEDIA: Record<string, string> = {
   heroVideo:
     "https://videos.pexels.com/video-files/8466804/8466804-hd_1920_1080_25fps.mp4",
   heroPoster:
-    "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&q=80",
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781556249/619745874_17845971243672214_6653399892148898739_n_jkasnq.webp",
   aboutImage:
     "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781554378/621733689_17846286267672214_555796510794911802_n_qu5uen.webp",
   aboutHero1:

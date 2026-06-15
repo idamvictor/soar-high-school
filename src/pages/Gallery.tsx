@@ -9,15 +9,6 @@ interface GalleryProps {
 }
 
 const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
-  const categories = [
-    "All",
-    "Academic Events",
-    "Sports",
-    "Cultural Day",
-    "Graduation",
-    "School Life",
-  ];
-  const [active, setActive] = React.useState("All");
   const [slideshowOpen, setSlideshowOpen] = React.useState(false);
   const [videoOpen, setVideoOpen] = React.useState(false);
   const [initialIdx, setInitialIdx] = React.useState(0);
@@ -28,110 +19,107 @@ const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
       title: "Class of 2024 Graduation",
       date: "13 Jul 2024",
       span: "tall",
-      src: MEDIA.g1,
+      src: MEDIA.academicsHero3,
     },
     {
       cat: "Cultural Day",
       title: "Cultural Day Procession",
       date: "14 Feb 2024",
       span: "",
-      src: MEDIA.g2,
+      src: MEDIA.aboutHero2,
     },
     {
       cat: "Sports",
       title: "Inter-house Sports Final",
       date: "6 Mar 2024",
       span: "wide",
-      src: MEDIA.g3,
+      src: MEDIA.tourSportsField,
     },
     {
       cat: "Academic Events",
       title: "Science Fair Winners",
       date: "22 Nov 2023",
       span: "",
-      src: MEDIA.g4,
+      src: MEDIA.academicsHero1,
     },
     {
       cat: "School Life",
       title: "Morning Assembly",
       date: "Daily",
       span: "",
-      src: MEDIA.g5,
+      src: MEDIA.tourSchoolLife,
     },
     {
       cat: "Cultural Day",
       title: "Igbo Dance Ensemble",
       date: "14 Feb 2024",
       span: "tall",
-      src: MEDIA.g6,
+      src: MEDIA.tourPerformingArts,
     },
     {
       cat: "Sports",
       title: "Football Champions",
       date: "Apr 2024",
       span: "",
-      src: MEDIA.g7,
+      src: MEDIA.academicsHero4,
     },
     {
       cat: "Academic Events",
       title: "Maths Olympiad",
       date: "Oct 2023",
       span: "",
-      src: MEDIA.g8,
+      src: MEDIA.tourComputerLab,
     },
     {
       cat: "Graduation",
       title: "Valedictory Speech",
       date: "13 Jul 2024",
       span: "wide",
-      src: MEDIA.g9,
+      src: MEDIA.aboutHero3,
     },
     {
       cat: "School Life",
       title: "Library Quiet Hour",
       date: "Daily",
       span: "",
-      src: MEDIA.g10,
+      src: MEDIA.tourSchoolLibrary,
     },
     {
       cat: "Cultural Day",
       title: "Traditional Attire",
       date: "14 Feb 2024",
       span: "",
-      src: MEDIA.g11,
+      src: MEDIA.aboutHero4,
     },
     {
       cat: "Sports",
       title: "Athletics Day",
       date: "Mar 2024",
       span: "tall",
-      src: MEDIA.g12,
+      src: MEDIA.academicsHero2,
     },
     {
       cat: "Academic Events",
-      title: "Spelling Bee",
+      title: "Science Exhibition",
       date: "Nov 2023",
       span: "",
-      src: MEDIA.g13,
+      src: MEDIA.tourScienceCenter,
     },
     {
       cat: "School Life",
-      title: "Lunch Break",
+      title: "Nursery Playtime",
       date: "Daily",
       span: "",
-      src: MEDIA.g14,
+      src: MEDIA.tourNurseryWing,
     },
     {
       cat: "Graduation",
-      title: "Class Photo 2024",
+      title: "Leadership Excellence",
       date: "Jul 2024",
       span: "wide",
-      src: MEDIA.g15,
+      src: MEDIA.leaderDefault,
     },
   ];
-
-  const filtered =
-    active === "All" ? photos : photos.filter((p) => p.cat === active);
 
   const openSlideshow = (idx: number) => {
     setInitialIdx(idx);
@@ -207,39 +195,25 @@ const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
         subtitle="Moments That Define the SoarHigh Experience."
         breadcrumb="Gallery"
         navigate={navigate}
-        images={[MEDIA.g1, MEDIA.g6, MEDIA.g3, MEDIA.g11]}
+        images={[
+          MEDIA.academicsHero1,
+          MEDIA.academicsHero2,
+          MEDIA.academicsHero3,
+          MEDIA.academicsHero4,
+        ]}
       />
-
-      {/* Filter Bar */}
-      <div className="filter-bar">
-        <div className="container filter-inner">
-          {categories.map((c) => (
-            <button
-              key={c}
-              className={`filter-pill ${active === c ? "active" : ""}`}
-              onClick={() => setActive(c)}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-      </div>
 
       {/* Photo Grid */}
       <section className="section">
         <div className="container">
           <div className="masonry">
-            {filtered.map((p, i) => (
+            {photos.map((p, i) => (
               <div
-                key={`${active}-${i}`}
+                key={i}
                 className={`masonry-tile ${p.span}`}
                 onClick={() => openSlideshow(i)}
               >
-                <Img src={p.src} alt={p.title} label={p.cat} />
-                <div className="masonry-overlay">
-                  <div className="overlay-title">{p.title}</div>
-                  <div className="overlay-date">{p.date}</div>
-                </div>
+                <Img src={p.src} alt="Gallery image" />
               </div>
             ))}
           </div>
@@ -306,8 +280,8 @@ const Gallery: React.FC<GalleryProps> = ({ navigate }) => {
       <SlideshowModal
         open={slideshowOpen}
         onClose={() => setSlideshowOpen(false)}
-        items={filtered}
-        title={`Gallery · ${active}`}
+        items={photos}
+        title="Gallery Showcase"
         initialIdx={initialIdx}
       />
 

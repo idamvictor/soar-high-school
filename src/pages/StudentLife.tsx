@@ -139,11 +139,10 @@ const StudentLife: React.FC<StudentLifeProps> = ({ navigate }) => {
         breadcrumb="Student Life"
         navigate={navigate}
         images={[
-          MEDIA.studentsGroup,
-          MEDIA.football,
-          MEDIA.culturalDance,
-          MEDIA.drama,
-          MEDIA.library,
+          MEDIA.academicsHero1,
+          MEDIA.academicsHero2,
+          MEDIA.academicsHero3,
+          MEDIA.academicsHero4,
         ]}
       />
 

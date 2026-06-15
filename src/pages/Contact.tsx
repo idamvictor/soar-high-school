@@ -59,10 +59,10 @@ const Contact: React.FC<ContactProps> = ({ navigate }) => {
         breadcrumb="Contact"
         navigate={navigate}
         images={[
-          MEDIA.schoolBuilding,
-          MEDIA.studentsGroup,
-          MEDIA.studentsUniform,
-          MEDIA.studentSmiling,
+          MEDIA.academicsHero1,
+          MEDIA.academicsHero2,
+          MEDIA.academicsHero3,
+          MEDIA.academicsHero4,
         ]}
       />
 

@@ -558,6 +558,7 @@ export const SlideshowModal: React.FC<SlideshowModalProps> = ({
 }) => {
   const [idx, setIdx] = useState<number>(initialIdx);
   const [playing, setPlaying] = useState<boolean>(false);
+  const [isFullView, setIsFullView] = useState<boolean>(false);
 
   useEffect(() => {
     if (open) {
@@ -574,15 +575,22 @@ export const SlideshowModal: React.FC<SlideshowModalProps> = ({
   const prev = React.useCallback(() => goto(idx - 1), [idx, goto]);
 
   useEffect(() => {
-    if (!open || !playing || isVideo) return;
+    if (!open || !playing || isVideo || isFullView) return;
     const t = setInterval(next, 4200);
     return () => clearInterval(t);
-  }, [open, playing, next, isVideo]);
+  }, [open, playing, next, isVideo, isFullView]);
 
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        if (isFullView) {
+          setIsFullView(false);
+        } else {
+          onClose();
+        }
+      }
+      if (isFullView) return;
       if (e.key === "ArrowRight") next();
       if (e.key === "ArrowLeft") prev();
       if (e.key === " " && !isVideo) {
@@ -653,6 +661,10 @@ export const SlideshowModal: React.FC<SlideshowModalProps> = ({
             <div
               key={i}
               className={`tour-slide ${idx === i ? "active" : idx > i ? "before" : "after"}`}
+              onClick={() => idx === i && !isVideo && setIsFullView(true)}
+              style={{
+                cursor: idx === i && !isVideo ? "zoom-in" : "default",
+              }}
             >
               {isVideo ? (
                 <video
@@ -670,6 +682,28 @@ export const SlideshowModal: React.FC<SlideshowModalProps> = ({
             </div>
           ))}
 
+          {/* Full View Overlay */}
+          {isFullView && !isVideo && (
+            <div
+              className="tour-fullview-overlay"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsFullView(false);
+              }}
+            >
+              <div className="tour-fullview-content">
+                <img src={items[idx].src} alt={items[idx].title} />
+                <button
+                  className="tour-fullview-close"
+                  onClick={() => setIsFullView(false)}
+                >
+                  <Icon.close width={24} height={24} />
+                  <span>Close Full View</span>
+                </button>
+              </div>
+            </div>
+          )}
+
           {playing && !isVideo && (
             <div
               className="tour-progress"
@@ -678,20 +712,7 @@ export const SlideshowModal: React.FC<SlideshowModalProps> = ({
             ></div>
           )}
 
-          <div className="tour-caption" key={`c-${idx}`}>
-            <div className="tour-caption-title">{items[idx].title}</div>
-            {items[idx].caption && (
-              <div className="tour-caption-body">{items[idx].caption}</div>
-            )}
-            {items[idx].date && (
-              <div
-                className="tour-caption-body"
-                style={{ color: "var(--gold)", fontWeight: 600 }}
-              >
-                {items[idx].date}
-              </div>
-            )}
-          </div>
+          {/* Caption removed as it may not match current images */}
 
           <button
             className="tour-nav prev"

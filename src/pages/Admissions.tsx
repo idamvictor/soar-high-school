@@ -157,10 +157,10 @@ const Admissions: React.FC<AdmissionsProps> = ({ navigate }) => {
         breadcrumb="Admissions"
         navigate={navigate}
         images={[
-          MEDIA.studentsUniform,
-          MEDIA.studentsGroup,
-          MEDIA.studentSmiling,
-          MEDIA.graduation,
+          MEDIA.academicsHero1,
+          MEDIA.academicsHero2,
+          MEDIA.academicsHero3,
+          MEDIA.academicsHero4,
         ]}
       >
         <div style={{ marginTop: 32 }}>

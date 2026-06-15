@@ -116,7 +116,14 @@ const Home: React.FC<HomeProps> = ({ navigate }) => {
       {/* HERO */}
       <section className="hero">
         <div className="hero-bg">
-          <video autoPlay muted loop playsInline className="hero-bg-video">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="hero-bg-video"
+            poster={MEDIA.heroPoster}
+          >
             <source src={MEDIA.heroVideo} type="video/mp4" />
           </video>
           <div className="hero-bg-tint"></div>

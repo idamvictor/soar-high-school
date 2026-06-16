@@ -233,12 +233,12 @@ const Academics: React.FC<AcademicsProps> = ({ navigate }) => {
           <div className="grid grid-3 extras-grid">
             {extras.map((e, i) => {
               const imgs = [
-                MEDIA.debate,
-                MEDIA.science,
-                MEDIA.drama,
-                MEDIA.football,
-                MEDIA.coding,
-                MEDIA.culturalDance,
+                MEDIA.club1,
+                MEDIA.club2,
+                MEDIA.club3,
+                MEDIA.tourSportsField,
+                MEDIA.club5,
+                MEDIA.club6,
               ];
               return (
                 <Reveal key={i} delay={(i % 3) * 90}>

@@ -2470,6 +2470,9 @@ textarea.form-control {
   transition:
     transform 0.3s,
     box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .extra-card:hover {
   transform: translateY(-4px);
@@ -2478,9 +2481,11 @@ textarea.form-control {
 .extra-image {
   height: 180px;
   border-radius: 0;
+  flex-shrink: 0;
 }
 .extra-body {
   padding: 24px;
+  flex-grow: 1;
 }
 .extra-tag {
   display: inline-block;
@@ -3127,6 +3132,11 @@ textarea.form-control {
     grid-template-columns: 1fr;
   }
 }
+.club-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
 .club-card {
   background: white;
   border-radius: 6px;
@@ -3134,6 +3144,9 @@ textarea.form-control {
   transition:
     transform 0.3s,
     box-shadow 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .club-card:hover {
   transform: translateY(-4px);
@@ -3143,6 +3156,7 @@ textarea.form-control {
   height: 180px;
   border-radius: 0;
   position: relative;
+  flex-shrink: 0;
 }
 .club-icon {
   position: absolute;
@@ -3165,6 +3179,7 @@ textarea.form-control {
   background: var(--navy);
   padding: 20px 22px;
   color: white;
+  flex-grow: 1;
 }
 .club-body h4 {
   color: var(--gold);

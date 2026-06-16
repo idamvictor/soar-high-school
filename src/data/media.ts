@@ -70,6 +70,30 @@ export const MEDIA: Record<string, string> = {
   tourSchoolLife:
     "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781559454/623800262_17847297336672214_2798931632193759126_n_gabuvn.webp",
 
+  // Club Images
+  club1:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781597690/623455612_17847012138672214_312376540567820607_n_owdrfe.webp",
+  club2:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781597717/622129796_17847012150672214_2878126106596382894_n_q47hmh.webp",
+  club3:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781597739/623349675_17847012180672214_5432782880141205321_n_nxqm7d.webp",
+  club4:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781597877/623420716_17847012189672214_5690862359395395325_n_pvkd2v.webp",
+  club5:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781597922/622513500_17847012222672214_7173965342004505912_n_rctthv.webp",
+  club6:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781597991/622493458_17847012234672214_1692537404452286804_n_yg56at.webp",
+  club7:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781598034/621672791_17847012252672214_2565443817052432168_n_vr9d4n.webp",
+  club8:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781598064/622004774_17847012270672214_1849114341477255733_n_yg2s5k.webp",
+
+  // Arts & Culture
+  artsDrama:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781559454/623800262_17847297336672214_2798931632193759126_n_gabuvn.webp",
+  artsCultural:
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781598543/624716212_17847297255672214_8975721374691767366_n_jjrrng.webp",
+
   // Generic students / classrooms
   studentsUniform:
     "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80",
@@ -126,12 +150,7 @@ export const MEDIA: Record<string, string> = {
   culturalDance:
     "https://images.unsplash.com/photo-1547153760-18fc86324498?w=900&q=80",
 
-  // Arts spread
-  artsDrama:
-    "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?w=900&q=80",
-  artsCultural:
-    "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=900&q=80",
-
+  
   // Gallery photos (15)
   g1: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900&q=80", // graduation
   g2: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=900&q=80", // cultural

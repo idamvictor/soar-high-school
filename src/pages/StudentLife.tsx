@@ -176,14 +176,14 @@ const StudentLife: React.FC<StudentLifeProps> = ({ navigate }) => {
           <div className="club-grid">
             {clubs.map((c, i) => {
               const imgs = [
-                MEDIA.debate,
-                MEDIA.science,
-                MEDIA.drama,
-                MEDIA.literature,
-                MEDIA.coding,
-                MEDIA.culturalArts,
-                MEDIA.photography,
-                MEDIA.entrepreneurship,
+                MEDIA.club1,
+                MEDIA.club2,
+                MEDIA.club3,
+                MEDIA.club4,
+                MEDIA.club5,
+                MEDIA.club6,
+                MEDIA.club7,
+                MEDIA.club8,
               ];
               return (
                 <Reveal key={i} delay={(i % 4) * 90}>

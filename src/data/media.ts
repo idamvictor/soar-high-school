@@ -68,7 +68,7 @@ export const MEDIA: Record<string, string> = {
   tourNurseryWing:
     "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781559263/619538319_17845971267672214_8910736205936330114_n_z3mxpg.webp",
   tourSchoolLife:
-    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781559454/623800262_17847297336672214_2798931632193759126_n_gabuvn.webp",
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075830/WhatsApp_Image_2026-06-16_at_8.49.00_PM_1_awlvk1.jpg",
 
   // Club Images
   club1:
@@ -90,7 +90,7 @@ export const MEDIA: Record<string, string> = {
 
   // Arts & Culture
   artsDrama:
-    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781559454/623800262_17847297336672214_2798931632193759126_n_gabuvn.webp",
+    "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075830/WhatsApp_Image_2026-06-16_at_8.49.00_PM_1_awlvk1.jpg",
   artsCultural:
     "https://res.cloudinary.com/dyp8gtllq/image/upload/v1781598543/624716212_17847297255672214_8975721374691767366_n_jjrrng.webp",
 
@@ -150,7 +150,6 @@ export const MEDIA: Record<string, string> = {
   culturalDance:
     "https://images.unsplash.com/photo-1547153760-18fc86324498?w=900&q=80",
 
-  
   // Gallery photos (15)
   g1: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=900&q=80", // graduation
   g2: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=900&q=80", // cultural
@@ -167,6 +166,30 @@ export const MEDIA: Record<string, string> = {
   g13: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=900&q=80", // spelling
   g14: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&q=80", // lunch
   g15: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1200&q=80", // class photo wide
+
+  g16: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075830/WhatsApp_Image_2026-06-16_at_8.49.00_PM_1_awlvk1.jpg",
+  g17: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075830/WhatsApp_Image_2026-06-16_at_8.48.59_PM_1_r2kmgj.jpg",
+  g18: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075831/WhatsApp_Image_2026-06-16_at_8.49.00_PM_2_yzujqf.jpg",
+  g19: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075831/WhatsApp_Image_2026-06-16_at_8.48.50_PM_4_wsus0a.jpg",
+  g20: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075832/WhatsApp_Image_2026-06-16_at_8.48.50_PM_2_uh2d5i.jpg",
+  g21: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075832/WhatsApp_Image_2026-06-16_at_8.48.59_PM_2_upbhy2.jpg",
+  g22: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075832/WhatsApp_Image_2026-06-16_at_8.49.01_PM_1_zsmwg6.jpg",
+  g23: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075832/WhatsApp_Image_2026-06-16_at_8.48.50_PM_3_nsk6yi.jpg",
+  g24: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075833/WhatsApp_Image_2026-06-16_at_8.49.02_PM_mncgin.jpg",
+  g25: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075832/WhatsApp_Image_2026-06-16_at_8.49.00_PM_zm4t5h.jpg",
+  g26: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075832/WhatsApp_Image_2026-06-16_at_8.49.01_PM_dcwok6.jpg",
+  g27: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075833/WhatsApp_Image_2026-06-16_at_8.48.51_PM_1_ziaufq.jpg",
+  g28: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075834/WhatsApp_Image_2026-06-16_at_8.48.58_PM_g9mhfr.jpg",
+  g29: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075835/WhatsApp_Image_2026-06-16_at_8.48.49_PM_ccekwr.jpg",
+  g30: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075836/WhatsApp_Image_2026-06-16_at_8.48.50_PM_hbovxm.jpg",
+  g31: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075834/WhatsApp_Image_2026-06-16_at_8.46.38_PM_pixfs3.jpg",
+  g32: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075835/WhatsApp_Image_2026-06-16_at_8.49.01_PM_2_pymr8t.jpg",
+  g33: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075835/WhatsApp_Image_2026-06-16_at_8.46.29_PM_jpfxpb.jpg",
+  g34: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075836/WhatsApp_Image_2026-06-16_at_8.48.50_PM_1_ugd801.jpg",
+  g35: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075837/WhatsApp_Image_2026-06-16_at_8.49.01_PM_3_fse7hx.jpg",
+  g36: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075836/WhatsApp_Image_2026-06-16_at_8.48.51_PM_grmg67.jpg",
+  g37: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075840/WhatsApp_Image_2026-06-16_at_8.48.59_PM_bwg3ws.jpg",
+  g38: "https://res.cloudinary.com/dyp8gtllq/image/upload/v1782075837/WhatsApp_Image_2026-06-16_at_8.48.56_PM_movhjz.jpg",
 
   // Video thumbnails
   v1: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=900&q=80",
